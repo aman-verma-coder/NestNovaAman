@@ -53,6 +53,12 @@ body {
     margin-right: 1.5rem !important;
 }
 
+#faceb,
+#insta,
+#link {
+    text-decoration: none;
+}
+
 footer {
     height: 10rem;
     width: 100%;
@@ -65,6 +71,7 @@ footer {
     color: black;
     margin-right: 1.25rem;
 }
+
 
 .f-info-links a:hover {
     text-decoration: underline;
@@ -589,7 +596,7 @@ footer {
         overflow: scroll !important;
     }
 
-    #filters form{
+    #filters form {
         display: flex;
         align-items: center;
         margin-bottom: -16px;
