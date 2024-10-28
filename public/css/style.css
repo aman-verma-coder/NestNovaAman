@@ -53,10 +53,12 @@ body {
     margin-right: 1.5rem !important;
 }
 
-#faceb>i,
-#insta>i,
-#link>i {
+#faceb,
+#insta,
+#link {
+    color: inherit;
     text-decoration: none;
+    font-size: inherit;
 }
 
 footer {
