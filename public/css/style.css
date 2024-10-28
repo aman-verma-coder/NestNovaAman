@@ -62,10 +62,19 @@ body {
 }
 
 footer {
-    height: 13.33rem;
+    height: 10rem;
     width: 100%;
     display: flex;
     flex-direction: column;
+    background-color: #ebebeb;
+    /* add background color here */
+}
+
+.footer-made-by {
+    background-color: #ebebeb;
+    width: 100%;
+    text-align: center;
+    padding: 0.5rem 0;
 }
 
 .f-info-links a {
