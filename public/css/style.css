@@ -53,9 +53,9 @@ body {
     margin-right: 1.5rem !important;
 }
 
-#faceb,
-#insta,
-#link {
+#faceb>i,
+#insta>i,
+#link>i {
     text-decoration: none;
 }
 
