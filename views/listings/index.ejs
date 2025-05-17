@@ -111,8 +111,21 @@
                                         <a href="/listings/<%= listing._id %>/show" class="listing-link"
                                             style="width: 20rem;">
                                             <div class="card col" style="width: 100%;">
-                                                <img src="<%= listing.image.url %>" class="card-img-top" alt="..."
-                                                    style="height: 20rem;">
+                                                <div class="position-relative">
+                                                    <img src="<%= listing.image.url %>" class="card-img-top" alt="..."
+                                                        style="height: 20rem;">
+                                                    <% if(currentUser) { %>
+                                                        <form action="/wishlists/quick-add/<%= listing._id %>"
+                                                            method="POST" class="position-absolute"
+                                                            style="top: 10px; right: 10px;">
+                                                            <button type="submit"
+                                                                class="btn btn-sm btn-light rounded-circle p-2"
+                                                                title="Save to Wishlist">
+                                                                <i class="fas fa-heart text-danger"></i>
+                                                            </button>
+                                                        </form>
+                                                        <% } %>
+                                                </div>
                                                 <div class="card-img-overlay"></div>
                                                 <div class="card-body">
                                                     <p class="card-text">

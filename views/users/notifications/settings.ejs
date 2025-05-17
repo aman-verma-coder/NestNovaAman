@@ -1,0 +1,83 @@
+<% layout("/layout/boilerplate") -%>
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="card">
+                    <div class="card-header bg-light d-flex justify-content-between align-items-center">
+                        <h1 class="h3 mb-0">Notification Settings</h1>
+                        <a href="/notifications" class="btn btn-outline-primary btn-sm">Back to Notifications</a>
+                    </div>
+                    <div class="card-body">
+                        <form action="/notifications/settings" method="POST">
+                            <h5 class="mb-3">Email Notifications</h5>
+                            <div class="form-check form-switch mb-3">
+                                <input class="form-check-input" type="checkbox" id="emailNotifications"
+                                    name="emailNotifications" <%=currentUser.notificationPreferences.emailNotifications
+                                    ? 'checked' : '' %>>
+                                <label class="form-check-label" for="emailNotifications">Receive Email
+                                    Notifications</label>
+                                <small class="form-text text-muted d-block">Get important notifications delivered to
+                                    your email address.</small>
+                            </div>
+
+                            <hr class="my-4">
+                            <h5 class="mb-3">Notification Types</h5>
+
+                            <div class="form-check form-switch mb-3">
+                                <input class="form-check-input" type="checkbox" id="bookingUpdates"
+                                    name="bookingUpdates" <%=currentUser.notificationPreferences.bookingUpdates
+                                    ? 'checked' : '' %>>
+                                <label class="form-check-label" for="bookingUpdates">Booking Updates</label>
+                                <small class="form-text text-muted d-block">Notifications about your bookings, including
+                                    confirmations, changes, and reminders.</small>
+                            </div>
+
+                            <div class="form-check form-switch mb-3">
+                                <input class="form-check-input" type="checkbox" id="reviewNotifications"
+                                    name="reviewNotifications"
+                                    <%=currentUser.notificationPreferences.reviewNotifications ? 'checked' : '' %>>
+                                <label class="form-check-label" for="reviewNotifications">Review Notifications</label>
+                                <small class="form-text text-muted d-block">Get notified when someone leaves a review on
+                                    your listings or responds to your reviews.</small>
+                            </div>
+
+                            <div class="form-check form-switch mb-3">
+                                <input class="form-check-input" type="checkbox" id="messageNotifications"
+                                    name="messageNotifications"
+                                    <%=currentUser.notificationPreferences.messageNotifications ? 'checked' : '' %>>
+                                <label class="form-check-label" for="messageNotifications">Message Notifications</label>
+                                <small class="form-text text-muted d-block">Get notified when you receive new messages
+                                    from other users.</small>
+                            </div>
+
+                            <div class="form-check form-switch mb-3">
+                                <input class="form-check-input" type="checkbox" id="systemNotifications"
+                                    name="systemNotifications"
+                                    <%=currentUser.notificationPreferences.systemNotifications ? 'checked' : '' %>>
+                                <label class="form-check-label" for="systemNotifications">System Notifications</label>
+                                <small class="form-text text-muted d-block">Important updates about your account and the
+                                    platform.</small>
+                            </div>
+
+                            <hr class="my-4">
+                            <h5 class="mb-3">Marketing Communications</h5>
+
+                            <div class="form-check form-switch mb-3">
+                                <input class="form-check-input" type="checkbox" id="marketingEmails"
+                                    name="marketingEmails" <%=currentUser.notificationPreferences.marketingEmails
+                                    ? 'checked' : '' %>>
+                                <label class="form-check-label" for="marketingEmails">Marketing Emails</label>
+                                <small class="form-text text-muted d-block">Receive promotional offers, newsletters, and
+                                    updates about new features.</small>
+                            </div>
+
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                                <button type="submit" class="btn btn-primary">Save Preferences</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

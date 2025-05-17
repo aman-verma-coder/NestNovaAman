@@ -61,18 +61,30 @@
                             <!-- payment -->
                             <div>
                                 <% if(currentUser) { %>
-                                    <form class="pay-form">
-                                        <input type="hidden" name="name" value="<%= showData.title %>" />
-                                        <input type="hidden" name="amount" value="<%= showData.price %>" />
-                                        <input type="hidden" name="description" value="<%= showData.description %>" />
-                                        <input type="hidden" name="listingId" value="<%= showData.id %>" />
-                                        <div class="rent-it-container btn-outline-success">
-                                            <button type="button" class="btn-rent-it btn-outline-success"
-                                                id="booking-btn" onclick="initiatePayment(event)"
-                                                style="padding: 12px 24px; background-color: #28a745; color: white; border-radius: 8px; border: none; transition: all 0.3s ease; margin: 16px auto; display: block;">Rent
-                                                It</button>
-                                        </div>
-                                    </form>
+                                    <div class="d-flex justify-content-center gap-3 mb-3">
+                                        <form class="pay-form">
+                                            <input type="hidden" name="name" value="<%= showData.title %>" />
+                                            <input type="hidden" name="amount" value="<%= showData.price %>" />
+                                            <input type="hidden" name="description"
+                                                value="<%= showData.description %>" />
+                                            <input type="hidden" name="listingId" value="<%= showData.id %>" />
+                                            <div class="rent-it-container btn-outline-success">
+                                                <button type="button" class="btn-rent-it btn-outline-success"
+                                                    id="booking-btn" onclick="initiatePayment(event)"
+                                                    style="padding: 12px 24px; background-color: #28a745; color: white; border-radius: 8px; border: none; transition: all 0.3s ease; margin: 16px auto; display: block;">Rent
+                                                    It</button>
+                                            </div>
+                                        </form>
+
+                                        <!-- Wishlist Button -->
+                                        <form action="/wishlists/quick-add/<%= showData.id %>" method="POST"
+                                            class="d-inline">
+                                            <button type="submit" class="btn btn-outline-danger"
+                                                style="padding: 12px 24px; border-radius: 8px; transition: all 0.3s ease; margin: 16px auto; display: block;">
+                                                <i class="fas fa-heart"></i> Save to Wishlist
+                                            </button>
+                                        </form>
+                                    </div>
 
                                     <!-- Payment Modal -->
                                     <div id="payment-modal" class="modal"
@@ -209,7 +221,7 @@
 
                         .starability-heartbeat {
                             display: inline-block;
-                            width: 100%;
+                            width: 150px;
                         }
 
                         .starability-heartbeat>input {
@@ -217,22 +229,24 @@
                         }
 
                         .starability-heartbeat>label {
-                            font-size: 0.9em;
-                            width: 25px;
-                            height: 25px;
+                            font-size: 1em;
+                            width: 30px;
+                            height: 30px;
+                            background-size: 30px auto;
                         }
                     }
 
                     @media (max-width: 576px) {
                         .starability-heartbeat {
-                            transform: scale(0.85);
-                            transform-origin: left center;
+                            /* Removed transform scale to maintain consistent size */
+                            width: 150px;
                         }
 
                         .starability-heartbeat>label {
-                            width: 20px;
-                            height: 20px;
-                            background-size: 20px auto;
+                            /* Maintain original size */
+                            width: 30px;
+                            height: 30px;
+                            background-size: 30px auto;
                         }
 
                         /* Review card star ratings */
