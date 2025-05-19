@@ -83,6 +83,9 @@ module.exports.logoutPost = (req, res, next) => {
     });
 };
 
+// Import recommendation service
+const RecommendationService = require("../services/recommendationService.js");
+
 // Profile methods
 module.exports.renderProfile = async (req, res) => {
     try {
@@ -98,7 +101,10 @@ module.exports.renderProfile = async (req, res) => {
         const listings = await Listing.find({ owner: req.user._id })
             .sort({ createdAt: -1 });
 
-        res.render("users/profile.ejs", { bookings, listings });
+        // Get personalized recommendations
+        const recommendations = await RecommendationService.getRecommendations(req.user._id, 4);
+
+        res.render("users/profile.ejs", { bookings, listings, recommendations });
     } catch (error) {
         req.flash("error", "Failed to load profile: " + error.message);
         res.redirect("/listings");

@@ -27,6 +27,16 @@ module.exports.searchListings = async (req, res) => {
         ]
     });
 
+    // Track search query for logged-in users
+    if (req.user) {
+        try {
+            await RecommendationService.trackSearchQuery(req.user._id, q);
+        } catch (error) {
+            console.error('Error tracking search query:', error);
+            // Non-critical error, continue with page rendering
+        }
+    }
+
     res.render("listings/index.ejs", { allListings, searchQuery: q });
 };
 
@@ -53,6 +63,8 @@ module.exports.index = async (req, res) => {
     // Only show approved listings to regular users
     // Admin users can see all listings in the admin dashboard
     const statusFilter = { status: "approved" };
+    // Recommendations have been removed from the home page
+    let recommendedListings = [];
 
     if (getObjectKey(req.query)) {
         let allListings = await Listing.find({
@@ -60,15 +72,18 @@ module.exports.index = async (req, res) => {
             ...statusFilter
         });
         console.log(allListings);
-        res.render("listings/index.ejs", { allListings });
+        res.render("listings/index.ejs", { allListings, recommendedListings });
         // res.send("All Ok");
     }
     else {
         let allListings = await Listing.find(statusFilter);
-        res.render("listings/index.ejs", { allListings });
+        res.render("listings/index.ejs", { allListings, recommendedListings });
         // res.send("Not Ok");
     }
 };
+
+// Import recommendation service
+const RecommendationService = require("../services/recommendationService.js");
 
 module.exports.show = async (req, res) => {
     let { id } = req.params;
@@ -85,6 +100,17 @@ module.exports.show = async (req, res) => {
         req.flash("error", "Listing Does not exist");
         res.redirect("/listings");
     }
+
+    // Track user view for recommendations if user is logged in
+    if (req.user) {
+        try {
+            await RecommendationService.trackListingView(req.user._id, id);
+        } catch (error) {
+            console.error('Error tracking listing view:', error);
+            // Non-critical error, continue with page rendering
+        }
+    }
+
     // console.log(showData.geometry.coordinates);
     console.log(showData);
     res.render("listings/show.ejs", { showData });
