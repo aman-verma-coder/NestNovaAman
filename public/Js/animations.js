@@ -18,13 +18,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Add interactive cursor effects
     setupCursorEffects();
-    
+
     // Initialize animated counters
     initAnimatedCounters();
-    
+
     // Add parallax effects
     addParallaxEffects();
-    
+
     // Add form interaction animations
     enhanceFormInteractions();
 });
@@ -80,7 +80,7 @@ function addMicroInteractions() {
             ripple.classList.add('ripple');
             ripple.style.left = `${x}px`;
             ripple.style.top = `${y}px`;
-            
+
             // Add color variation based on element type
             if (this.classList.contains('btn-primary')) {
                 ripple.style.backgroundColor = 'rgba(255, 255, 255, 0.6)';
@@ -96,18 +96,18 @@ function addMicroInteractions() {
                 ripple.remove();
             }, 600);
         });
-        
+
         // Add subtle scale effect on click
-        element.addEventListener('mousedown', function() {
+        element.addEventListener('mousedown', function () {
             this.style.transform = 'scale(0.98)';
             this.style.transition = 'transform 0.1s ease';
         });
-        
-        element.addEventListener('mouseup', function() {
+
+        element.addEventListener('mouseup', function () {
             this.style.transform = '';
         });
-        
-        element.addEventListener('mouseleave', function() {
+
+        element.addEventListener('mouseleave', function () {
             this.style.transform = '';
         });
     });
@@ -124,7 +124,7 @@ function addMicroInteractions() {
 
             const tiltX = (y - centerY) / 20;
             const tiltY = (centerX - x) / 20;
-            
+
             // Add subtle shadow movement
             const shadowX = (centerX - x) / 40;
             const shadowY = (centerY - y) / 40;
@@ -139,16 +139,16 @@ function addMicroInteractions() {
             this.style.boxShadow = '';
             this.style.transition = 'transform 0.5s ease, box-shadow 0.5s ease';
         });
-        
+
         // Add hover effect to card images
         const cardImage = card.querySelector('.card-img-top, .listing-image');
         if (cardImage) {
-            card.addEventListener('mouseenter', function() {
+            card.addEventListener('mouseenter', function () {
                 cardImage.style.transform = 'scale(1.05)';
                 cardImage.style.transition = 'transform 0.5s ease';
             });
-            
-            card.addEventListener('mouseleave', function() {
+
+            card.addEventListener('mouseleave', function () {
                 cardImage.style.transform = 'scale(1)';
             });
         }
@@ -160,7 +160,7 @@ function addMicroInteractions() {
         if (parent && parent.classList.contains('form-group')) {
             input.addEventListener('focus', function () {
                 parent.classList.add('input-focused');
-                
+
                 // Add subtle pulse animation to label
                 const label = parent.querySelector('label');
                 if (label) {
@@ -172,7 +172,7 @@ function addMicroInteractions() {
 
             input.addEventListener('blur', function () {
                 parent.classList.remove('input-focused');
-                
+
                 // Reset label style
                 const label = parent.querySelector('label');
                 if (label) {
@@ -181,32 +181,32 @@ function addMicroInteractions() {
                 }
             });
         }
-        
+
         // Add focus border animation
-        input.addEventListener('focus', function() {
+        input.addEventListener('focus', function () {
             this.style.borderColor = '#fe424d';
             this.style.boxShadow = '0 0 0 0.2rem rgba(254, 66, 77, 0.25)';
             this.style.transition = 'border-color 0.3s ease, box-shadow 0.3s ease';
         });
-        
-        input.addEventListener('blur', function() {
+
+        input.addEventListener('blur', function () {
             this.style.borderColor = '';
             this.style.boxShadow = '';
         });
     });
-    
+
     // Add hover effects to icons
     document.querySelectorAll('.fa, .fas, .far, .fab').forEach(icon => {
         if (!icon.closest('.btn')) { // Skip icons inside buttons
             icon.classList.add('animated-icon');
-            
-            icon.addEventListener('mouseenter', function() {
+
+            icon.addEventListener('mouseenter', function () {
                 this.style.transform = 'scale(1.2) rotate(5deg)';
                 this.style.color = '#fe424d';
                 this.style.transition = 'transform 0.3s ease, color 0.3s ease';
             });
-            
-            icon.addEventListener('mouseleave', function() {
+
+            icon.addEventListener('mouseleave', function () {
                 this.style.transform = '';
                 this.style.color = '';
             });
@@ -337,21 +337,21 @@ function setupCursorEffects() {
  */
 function initAnimatedCounters() {
     const counters = document.querySelectorAll('.counter, [data-counter], .stat-number');
-    
+
     counters.forEach(counter => {
         const target = parseInt(counter.getAttribute('data-target') || counter.textContent);
         if (isNaN(target)) return;
-        
+
         // Set starting value
         counter.textContent = '0';
-        
+
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     let count = 0;
                     const duration = 2000; // ms
                     const increment = target / (duration / 16); // For 60fps
-                    
+
                     const updateCount = () => {
                         count += increment;
                         if (count < target) {
@@ -359,7 +359,7 @@ function initAnimatedCounters() {
                             requestAnimationFrame(updateCount);
                         } else {
                             counter.textContent = target;
-                            
+
                             // Add a small bounce effect when complete
                             counter.style.transform = 'scale(1.1)';
                             setTimeout(() => {
@@ -368,13 +368,13 @@ function initAnimatedCounters() {
                             }, 100);
                         }
                     };
-                    
+
                     requestAnimationFrame(updateCount);
                     observer.unobserve(entry.target);
                 }
             });
         }, { threshold: 0.5 });
-        
+
         observer.observe(counter);
     });
 }
@@ -384,38 +384,38 @@ function initAnimatedCounters() {
  */
 function addParallaxEffects() {
     const parallaxElements = document.querySelectorAll('.parallax, .parallax-bg, .bg-image');
-    
+
     parallaxElements.forEach(element => {
         const speed = parseFloat(element.getAttribute('data-parallax-speed') || 0.2);
-        
-        window.addEventListener('scroll', function() {
+
+        window.addEventListener('scroll', function () {
             const scrollPosition = window.pageYOffset;
             const offset = scrollPosition * speed;
             element.style.transform = `translateY(${offset}px)`;
         });
     });
-    
+
     // Add parallax effect to hero sections
     const heroSections = document.querySelectorAll('.hero-section, .jumbotron, .banner');
     heroSections.forEach(section => {
-        window.addEventListener('scroll', function() {
+        window.addEventListener('scroll', function () {
             const scrollPosition = window.pageYOffset;
             if (scrollPosition < 600) { // Only apply effect when near the top
                 section.style.backgroundPositionY = `${scrollPosition * 0.5}px`;
             }
         });
     });
-    
+
     // Add mouse movement parallax to selected elements
     const mouseParallaxElements = document.querySelectorAll('.mouse-parallax');
     mouseParallaxElements.forEach(element => {
-        document.addEventListener('mousemove', function(e) {
+        document.addEventListener('mousemove', function (e) {
             const mouseX = e.clientX / window.innerWidth;
             const mouseY = e.clientY / window.innerHeight;
-            
+
             const moveX = (mouseX - 0.5) * 20;
             const moveY = (mouseY - 0.5) * 20;
-            
+
             element.style.transform = `translate(${moveX}px, ${moveY}px)`;
             element.style.transition = 'transform 0.1s ease-out';
         });
@@ -428,22 +428,22 @@ function addParallaxEffects() {
 function enhanceFormInteractions() {
     // Add animated validation feedback
     document.querySelectorAll('form').forEach(form => {
-        form.addEventListener('submit', function(e) {
+        form.addEventListener('submit', function (e) {
             // Only for forms with client-side validation
             if (this.getAttribute('data-validate') === 'true') {
                 e.preventDefault();
-                
+
                 // Validate form fields
                 let isValid = true;
                 const requiredFields = this.querySelectorAll('[required]');
-                
+
                 requiredFields.forEach(field => {
                     if (!field.value.trim()) {
                         isValid = false;
-                        
+
                         // Add shake animation to invalid fields
                         field.classList.add('invalid-shake');
-                        
+
                         // Create or update validation message
                         let validationMessage = field.nextElementSibling;
                         if (!validationMessage || !validationMessage.classList.contains('validation-message')) {
@@ -451,7 +451,7 @@ function enhanceFormInteractions() {
                             validationMessage.className = 'validation-message';
                             field.parentNode.insertBefore(validationMessage, field.nextSibling);
                         }
-                        
+
                         validationMessage.textContent = 'This field is required';
                         validationMessage.style.color = '#fe424d';
                         validationMessage.style.fontSize = '0.8rem';
@@ -459,25 +459,25 @@ function enhanceFormInteractions() {
                         validationMessage.style.opacity = '0';
                         validationMessage.style.transform = 'translateY(-10px)';
                         validationMessage.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-                        
+
                         // Animate validation message
                         setTimeout(() => {
                             validationMessage.style.opacity = '1';
                             validationMessage.style.transform = 'translateY(0)';
                         }, 10);
-                        
+
                         // Remove shake after animation completes
                         setTimeout(() => {
                             field.classList.remove('invalid-shake');
                         }, 600);
                     }
                 });
-                
+
                 // If valid, show success animation
                 if (isValid) {
                     // Add success animation to form
                     this.classList.add('form-success');
-                    
+
                     // Show success message
                     const successMessage = document.createElement('div');
                     successMessage.className = 'alert alert-success mt-3';
@@ -486,17 +486,17 @@ function enhanceFormInteractions() {
                     successMessage.style.transform = 'translateY(-10px)';
                     successMessage.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
                     this.appendChild(successMessage);
-                    
+
                     // Animate success message
                     setTimeout(() => {
                         successMessage.style.opacity = '1';
                         successMessage.style.transform = 'translateY(0)';
                     }, 10);
-                    
+
                     // Reset form with animation
                     setTimeout(() => {
                         this.reset();
-                        
+
                         // Remove success message with fade out
                         setTimeout(() => {
                             successMessage.style.opacity = '0';
@@ -510,18 +510,18 @@ function enhanceFormInteractions() {
                 }
             }
         });
-        
+
         // Add real-time validation feedback
         const inputFields = form.querySelectorAll('input, textarea, select');
         inputFields.forEach(field => {
-            field.addEventListener('input', function() {
+            field.addEventListener('input', function () {
                 if (this.hasAttribute('required') && this.value.trim()) {
                     // Remove validation message if field is now valid
                     const validationMessage = this.nextElementSibling;
                     if (validationMessage && validationMessage.classList.contains('validation-message')) {
                         validationMessage.style.opacity = '0';
                         validationMessage.style.transform = 'translateY(-10px)';
-                        
+
                         setTimeout(() => {
                             validationMessage.remove();
                         }, 300);
@@ -530,7 +530,7 @@ function enhanceFormInteractions() {
             });
         });
     });
-    
+
     // Add CSS for form animations
     const formStyles = document.createElement('style');
     formStyles.textContent = `
