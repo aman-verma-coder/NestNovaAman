@@ -66,3 +66,4 @@ document.addEventListener('DOMContentLoaded', function () {
     // This ensures the preloader doesn't stay indefinitely if there's an issue
     setTimeout(hidePreloaders, 8000);
 });
+// Enhance the preloader with creative animations and styles
