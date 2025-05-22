@@ -29,6 +29,8 @@ router.get("/logout", userController.logoutPost);
 router.get("/profile", isLoggedIn, wrapAsync(userController.renderProfile));
 router.post("/users/update-profile", isLoggedIn, upload.single('avatar'), wrapAsync(userController.updateProfile));
 router.get("/users/bookings", isLoggedIn, wrapAsync(userController.renderBookings));
+// Public profile route
+router.get("/users/:username", wrapAsync(userController.viewUserProfile));
 // Change password route
 router.post("/users/change-password", isLoggedIn, wrapAsync(userController.changePassword));
 

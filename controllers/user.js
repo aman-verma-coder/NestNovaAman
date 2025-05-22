@@ -225,6 +225,36 @@ module.exports.updateNotifications = async (req, res) => {
 };
 
 
+// View another user's profile
+module.exports.viewUserProfile = async (req, res) => {
+    try {
+        const { username } = req.params;
+
+        // Find the user by username
+        const user = await User.findOne({ username });
+
+        if (!user) {
+            req.flash("error", "User not found");
+            return res.redirect("/listings");
+        }
+
+        // Get user's public listings
+        const listings = await Listing.find({
+            owner: user._id,
+            status: 'approved'
+        }).sort({ createdAt: -1 });
+
+        res.render("users/public-profile.ejs", {
+            profileUser: user,
+            listings
+        });
+    } catch (error) {
+        req.flash("error", "Failed to load profile: " + error.message);
+        res.redirect("/listings");
+    }
+};
+
+
 module.exports.renderBookings = async (req, res) => {
     try {
         const bookings = await Booking.find({ user: req.user._id }).populate({

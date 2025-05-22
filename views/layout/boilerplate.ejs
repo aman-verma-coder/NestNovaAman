@@ -31,16 +31,15 @@
                 <link rel="stylesheet" href="/css/interactive.css">
                 <link rel="stylesheet" href="/css/animations.css">
                 <link rel="stylesheet" href="/css/preloader.css">
-                <!-- Uncomment the line below to use alternative preloader style -->
-                <!-- <link rel="stylesheet" href="/css/preloader-alt.css"> -->
+                <link rel="stylesheet" href="/css/preloader-alt.css">
                 <link href="https://api.mapbox.com/mapbox-gl-js/v3.2.0/mapbox-gl.css" rel="stylesheet">
                 <script src="https://api.mapbox.com/mapbox-gl-js/v3.2.0/mapbox-gl.js"></script>
 
 </head>
 
 <body>
-    <!-- Page Preloader - Logo Style (Default) -->
-    <div id="preloader" class="preloader">
+    <!-- Main Preloader - Logo Style (For Home Page) -->
+    <div id="main-preloader" class="preloader">
         <div class="preloader-content">
             <div class="preloader-logo">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -61,17 +60,16 @@
         </div>
     </div>
 
-    <!-- Alternative Preloader Style (Uncomment to use) -->
-    <!-- 
-    <div id="preloader" class="preloader">
-        <div class="spinner">
-            <div class="bounce1"></div>
-            <div class="bounce2"></div>
-            <div class="bounce3"></div>
+    <!-- Alternative Preloader Style (For Other Pages) -->
+    <div id="alt-preloader" class="preloader">
+        <div class="alt-spinner-container">
+            <div class="alt-spinner-ring"></div>
+            <div class="alt-spinner-ring"></div>
+            <div class="alt-spinner-ring"></div>
+            <div class="alt-spinner-core"></div>
         </div>
         <div class="loading-text">LOADING...</div>
     </div>
-    -->
 
     <%- include("../includes/navbar.ejs") %>
         <!-- <h2>Wanderlust</h2> -->

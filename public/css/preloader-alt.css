@@ -1,16 +1,18 @@
 /**
  * Alternative Page Preloader Styles
- * Provides a different animation style for the page loading screen
+ * Provides a beautiful animated loading screen with rotation effects
  */
 
-.preloader {
+#alt-preloader.preloader {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     background-color: #f8f9fa;
-    display: flex;
+    background-image: linear-gradient(135deg, #f8f9fa 0%, #f1f2f6 100%);
+    display: none;
+    /* Initially hidden, controlled by JS */
     justify-content: center;
     align-items: center;
     z-index: 9999;
@@ -22,63 +24,105 @@
     visibility: hidden;
 }
 
-/* Spinner Animation - Alternative Style */
-.spinner {
-    width: 70px;
-    text-align: center;
+/* Enhanced Spinner Animation with Rotation */
+.alt-spinner-container {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: container-rotate 3s linear infinite;
 }
 
-.spinner>div {
-    width: 18px;
-    height: 18px;
+.alt-spinner-ring {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 4px solid transparent;
+    border-top-color: #fe424d;
+    border-right-color: #fe424d;
+    animation: spinner-rotate 2s ease-in-out infinite;
+}
+
+.alt-spinner-ring:nth-child(1) {
+    width: 60px;
+    height: 60px;
+    border-bottom-color: #fe424d;
+    animation-delay: -0.5s;
+}
+
+.alt-spinner-ring:nth-child(2) {
+    width: 40px;
+    height: 40px;
+    border-left-color: #fe424d;
+    animation-delay: -1s;
+}
+
+.alt-spinner-core {
+    width: 20px;
+    height: 20px;
     background-color: #fe424d;
-    border-radius: 100%;
-    display: inline-block;
-    animation: sk-bouncedelay 1.4s infinite ease-in-out both;
-    margin: 0 3px;
+    border-radius: 50%;
+    animation: pulse 1.5s ease-in-out infinite;
 }
 
-.spinner .bounce1 {
-    animation-delay: -0.32s;
+/* Loading text animation with better styling */
+.loading-text {
+    margin-top: 25px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #fe424d;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    animation: text-fade 1.5s infinite;
 }
 
-.spinner .bounce2 {
-    animation-delay: -0.16s;
+/* Keyframes for animations */
+@keyframes spinner-rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
-@keyframes sk-bouncedelay {
+@keyframes container-rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(-360deg);
+    }
+}
+
+@keyframes pulse {
 
     0%,
-    80%,
     100% {
-        transform: scale(0);
+        transform: scale(0.8);
+        opacity: 0.8;
     }
 
-    40% {
-        transform: scale(1.0);
+    50% {
+        transform: scale(1.2);
+        opacity: 1;
     }
 }
 
-/* Loading text animation */
-.loading-text {
-    margin-top: 20px;
-    font-size: 16px;
-    color: #fe424d;
-    letter-spacing: 3px;
-    animation: blink 1.5s infinite;
-}
+@keyframes text-fade {
 
-@keyframes blink {
-    0% {
-        opacity: 0.3;
+    0%,
+    100% {
+        opacity: 0.5;
     }
 
     50% {
         opacity: 1;
-    }
-
-    100% {
-        opacity: 0.3;
     }
 }
 
