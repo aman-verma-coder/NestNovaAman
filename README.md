@@ -8,6 +8,7 @@ NestNova is a comprehensive property listing and booking platform that connects 
 - **Browse Listings**: Explore properties with detailed descriptions, high-resolution images, amenities, pricing, and availability calendars
 - **Advanced Search**: Find perfect accommodations using powerful search filters by title, description, location, country, price range, or amenities
 - **Category Filtering**: Discover properties by categories like Trending, Beaches, Pools, Mountains, Iconic Cities, Countryside, Luxury, and Budget-friendly options
+- **Personalized Recommendations**: Receive tailored property suggestions based on your browsing history, previous bookings, and preferences
 - **User Authentication**: Create an account, log in securely, manage your profile, and track your booking history
 - **Wishlist Creation**: Save favorite properties to revisit later during your planning process
 - **Reviews & Ratings**: Leave detailed reviews and ratings for properties you've stayed at to help other travelers

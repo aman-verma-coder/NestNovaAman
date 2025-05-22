@@ -95,10 +95,20 @@ module.exports.show = async (req, res) => {
             populate: { path: "author" }
         })
         .populate("owner");
+
+    // Add full URL for social sharing
+    const fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
     // console.log(`Show Data${showData}`);
     if (!showData) {
         req.flash("error", "Listing Does not exist");
-        res.redirect("/listings");
+        return res.redirect("/listings");
+    }
+
+    // Check if the listing is pending or rejected and the current user is not the owner or admin
+    if ((showData.status === "pending" || showData.status === "rejected") &&
+        (!req.user || (!req.user.isAdmin && !showData.owner._id.equals(req.user._id)))) {
+        req.flash("error", "This listing is not available");
+        return res.redirect("/listings");
     }
 
     // Track user view for recommendations if user is logged in
@@ -113,7 +123,7 @@ module.exports.show = async (req, res) => {
 
     // console.log(showData.geometry.coordinates);
     console.log(showData);
-    res.render("listings/show.ejs", { showData });
+    res.render("listings/show.ejs", { showData, fullUrl });
 };
 
 module.exports.renderNewForm = (req, res) => {

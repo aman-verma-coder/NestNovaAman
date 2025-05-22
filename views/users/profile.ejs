@@ -394,6 +394,9 @@
 
     <!-- Footer or additional content can be added here if needed -->
 
+    <!-- Include profile interactive script -->
+    <script src="/Js/profile-interactive.js"></script>
+
     <!-- Edit Profile Modal -->
     <div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel"
         aria-hidden="true">
@@ -406,16 +409,20 @@
                 <div class="modal-body">
                     <form action="/users/update-profile" method="POST" enctype="multipart/form-data">
                         <div class="mb-3">
-                            <label for="avatar" class="form-label">Profile Picture</label>
-                            <input type="file" class="form-control" id="avatar" name="avatar" accept="image/*">
+                            <label for="avatar" class="form-label"><i class="fas fa-camera me-2"></i>Profile
+                                Picture</label>
+                            <input type="file" class="form-control" id="avatar" name="avatar" accept="image/*"
+                                data-bs-toggle="tooltip" title="Upload a new profile picture">
+                            <small class="form-text text-muted">Recommended size: 300x300 pixels</small>
                         </div>
                         <div class="mb-3">
-                            <label for="username" class="form-label">Username</label>
+                            <label for="username" class="form-label"><i class="fas fa-user me-2"></i>Username</label>
                             <input type="text" class="form-control" id="username" name="username"
-                                value="<%= currentUser.username %>" required>
+                                value="<%= currentUser.username %>" required data-bs-toggle="tooltip"
+                                title="Your display name on the platform">
                         </div>
                         <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
+                            <label for="email" class="form-label"><i class="fas fa-envelope me-2"></i>Email</label>
                             <input type="email" class="form-control" id="email" name="email"
                                 value="<%= currentUser.email %>" required>
                         </div>
